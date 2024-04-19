@@ -16,4 +16,6 @@ FLASK_APP=main.py
 ```
 
 ### Start:
+```
 docker-compose up --build
+```
