@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - ${REDIS_PORT}:6379
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    environment:
+      - REDIS_PORT=6379
+      - REDIS_DATABASES=${REDIS_DATABASES}
+    networks:
+      - web-network
+
+  web:
+    restart: always
+    build: .
+    command: flask run --host=0.0.0.0
+    environment:
+      - FLASK_APP=${FLASK_APP}
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+      - REDIS_PORT=${REDIS_PORT}
+      - REDIS_DATABASES=${REDIS_DATABASES}
+    ports:
+      - 8080:5000
+    volumes:
+      - ./app:/app
+    networks:
+      - web-network
+
+networks:
+  web-network:
