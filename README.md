@@ -6,12 +6,14 @@
 - Вновь созданные объекты должны создаваться, изменяться и читаться из NoSQL DB.
 
 # For start:
-Create .env and set:
+### Create .env and set:
 ```
 REDIS_PASSWORD=STRONG_PASSWORD
 REDIS_PORT=6379
 REDIS_DATABASES=1
 
 FLASK_APP=main.py
-
 ```
+
+### Start:
+docker-compose up --build
